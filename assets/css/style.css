@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+
+/* BOTON REGRESAR*/
+
+
+.btn-primary {
+  @apply inline-flex items-center gap-1 bg-primary hover:bg-primary/90 text-white text-sm font-fuente_primaria py-1.5 px-3 rounded-2xl transition;
+}
+
+.btn-secondary {
+  @apply inline-flex  items-center gap-1 px-4 py-1.5 rounded-full border border-gray-400 bg-white hover:bg-gray-100 text-text text-sm font-normal transition font-fuente_primaria;
+}
+
+
+.btn-tertiary {
+  @apply inline-flex h-9 items-center gap-1 px-4 py-1.5 rounded-full border border-gray-400 bg-transparent hover:bg-black/50 text-white font-normal text-sm  transition font-fuente_primaria;
+}
+.btn-tertiary i {
+  @apply text-lg;
+}
+
+.btn-tertiary.active {
+  @apply px-[15px] h-9 py-[5px] border-2 border-gray-600 bg-gray-600;
+}
+
+
+
+.btn-fourth{
+@apply w-9 h-9 text-white   font-light text-lg font-fuente_primaria rounded-full border border-white/10  bg-white/10 hover:bg-white/30 grid place-items-center;
+}
+
+.btn-fourth i{
+@apply  font-light  ;
+}
+
+
+
+
+/* Estilos responsivos para mobile: solo icono y botón circular */
+@media (max-width: 639px) {
+          .btn-secondary {
+              @apply inline-flex items-center justify-center 
+                    w-10 h-10        /* ancho y alto iguales */
+                    p-0            /* quitas padding extra */
+                    rounded-full;  /* borde 100% */
+            }
+            .btn-secondary i {
+              @apply text-lg;    /* ajuste del tamaño del icono */
+            }
+            .btn-secondary span {
+              @apply hidden;     /* oculta el texto */
+            }
+
+          
+            .btn-tertiary {
+              @apply inline-flex items-center justify-center w-12 h-12 p-0 gap-0 rounded-full;
+            }
+            .btn-tertiary span { @apply hidden; }         /* ya ocultás el texto */
+            .btn-tertiary i    { @apply text-[30px]; }      /* tamaño del icono */
+            .btn-tertiary.active { @apply w-12 h-12  ; }/* que no “recupere” padding en activo */
+
+            .btn-fourth{
+              @apply w-12 h-12 ;
+          }
+
+        }
+
+
+      /* flechas del slider */
+    .btn-slide-arrow {
+        @apply bg-black/90 rounded-full text-white
+              !w-9 !h-9
+              flex items-center justify-center
+              shadow-[0_4px_12px_rgba(0,0,0,0.1)];
+      }
+      
+      .btn-slide-arrow::after {
+        @apply text-base text-white;
+      }
+
+      .btn-slide-arrow i {
+        @apply text-white text-white;
+      }
+
+
+
+
+
+}
+
+
+
+
