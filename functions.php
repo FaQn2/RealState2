@@ -202,9 +202,7 @@ add_action('admin_head', function() {
 
 
 
-// SWUP SPA Implementation
 function enqueue_swup_scripts() {
-  // SWUP desde CDN
   wp_enqueue_script(
     'swup',
     'https://unpkg.com/swup@4/dist/Swup.modern.js',
@@ -213,21 +211,19 @@ function enqueue_swup_scripts() {
     true
   );
   
-  // Tu init simple
   wp_enqueue_script(
     'swup-init',
     get_template_directory_uri() . '/assets/js/swup-init.js',
     ['swup'],
-    '1.0.0',
+    filemtime(get_template_directory() . '/assets/js/swup-init.js'),
     true
   );
   
-  // CSS transitions
   wp_enqueue_style(
     'swup-transitions',
     get_template_directory_uri() . '/assets/css/swup-transitions.css',
     ['theme-tailwind'],
-    '1.0.0'
+    filemtime(get_template_directory() . '/assets/css/swup-transitions.css')
   );
 }
 add_action('wp_enqueue_scripts', 'enqueue_swup_scripts');

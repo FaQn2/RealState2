@@ -1,30 +1,241 @@
+/**
+ * swup-transitions.css - Versión completa
+ * Ubicación: /assets/css/swup-transitions.css
+ */
+
+/* ============================
+   PROGRESS BAR 
+   ============================ */
 .swup-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 3px;
-  background: rgb(var(--color-primary));
+  background: linear-gradient(90deg, 
+    rgb(var(--color-primary)), 
+    rgb(var(--color-secondary))
+  );
   z-index: 10000;
   transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(var(--color-primary), 0.5);
 }
 
+/* ============================
+   CONTENEDOR PRINCIPAL 
+   ============================ */
 #swup {
-  transition: opacity 0.4s ease;
+  opacity: 1;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transform: translateY(0);
 }
 
-html.is-changing #swup {
+/* Estados de transición */
+html.is-animating #swup {
+  transition-duration: 0.4s;
+}
+
+html.is-leaving #swup {
   opacity: 0;
+  transform: translateY(-10px);
 }
 
 html.is-rendering #swup {
   opacity: 0;
+  transform: translateY(10px);
 }
 
+/* ============================
+   CLASES DE TRANSICIÓN 
+   ============================ */
 .transition-fade {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
 
-html.is-changing .transition-fade {
+html.is-animating .transition-fade {
   opacity: 0;
+}
+
+.transition-slide {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.4s ease;
+}
+
+html.is-leaving .transition-slide {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+html.is-rendering .transition-slide {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+/* ============================
+   PÁGINAS ESPECÍFICAS 
+   ============================ */
+
+/* Frontpage */
+.page-template-front-page #swup {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+html.is-leaving .page-template-front-page #swup {
+  opacity: 0;
+  transform: scale(1.02);
+}
+
+html.is-rendering .page-template-front-page #swup {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Nivel 1 (Visual 360) */
+.page-template-nivel-1 #swup {
+  transition: opacity 0.2s ease;
+}
+
+/* Archive Unidades */
+.post-type-archive-apartamento #swup {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+html.is-leaving .post-type-archive-apartamento #swup {
+  transform: translateX(-15px);
+  opacity: 0;
+}
+
+html.is-rendering .post-type-archive-apartamento #swup {
+  transform: translateX(15px);
+  opacity: 0;
+}
+
+/* Single Apartamento/Amenity */
+.single-apartamento #swup,
+.single-amenity #swup {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+html.is-leaving .single-apartamento #swup,
+html.is-leaving .single-amenity #swup {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+/* ============================
+   FULLSCREEN STYLES 
+   ============================ */
+body.is-fullscreen {
+  overflow: hidden;
+}
+
+body.is-fullscreen #swup {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Botón fullscreen */
+#btn-fullscreen {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: rgb(var(--color-primary));
+  color: rgb(var(--color-white));
+  border-radius: 9999px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#btn-fullscreen:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+}
+
+#btn-fullscreen.fullscreen-active {
+  background: rgb(var(--color-secondary));
+}
+
+#btn-fullscreen i {
+  font-size: 1rem;
+}
+
+/* ============================
+   ELEMENTOS QUE PERSISTEN 
+   ============================ */
+[data-swup-preserve] {
+  transition: none !important;
+}
+
+#modal-filtros,
+#filtro-popup {
+  /* Los modales no deben animarse con SWUP */
+  transition: none !important;
+}
+
+/* ============================
+   LOADING STATE 
+   ============================ */
+html.is-animating {
+  cursor: wait;
+}
+
+html.is-animating a,
+html.is-animating button {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ============================
+   MOBILE OPTIMIZATIONS 
+   ============================ */
+@media (max-width: 768px) {
+  #swup {
+    transition-duration: 0.25s;
+  }
+  
+  html.is-leaving #swup {
+    transform: translateY(-5px);
+  }
+  
+  html.is-rendering #swup {
+    transform: translateY(5px);
+  }
+  
+  #btn-fullscreen {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  #btn-fullscreen span {
+    display: none;
+  }
+}
+
+/* ============================
+   REDUCED MOTION 
+   ============================ */
+@media (prefers-reduced-motion: reduce) {
+  #swup,
+  .transition-fade,
+  .transition-slide,
+  .swup-progress-bar {
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  html.is-leaving #swup,
+  html.is-rendering #swup {
+    opacity: 0;
+    transform: none;
+  }
 }

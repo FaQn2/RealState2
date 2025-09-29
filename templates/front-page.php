@@ -131,6 +131,15 @@ if ($video_url && !$imagen_url) {
       </a>
     <?php endif; ?>
   </div>
+
 </main>
+
+  <!-- Al final del template, antes del cierre -->
+<button id="btn-fullscreen" 
+        data-fullscreen-btn
+        class="fixed bottom-6 right-6 z-50 px-4 py-2 bg-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all">
+  <i class="fa-solid fa-expand"></i> 
+  <span class="hidden sm:inline">Pantalla completa</span>
+</button>
 
 <?php get_footer(); ?>
